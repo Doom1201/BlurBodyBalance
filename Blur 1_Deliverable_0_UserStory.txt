@@ -1,0 +1,31 @@
+﻿User Stories
+
+
+As a user I would like …
+* to keep track of my weight so I can see my weight loss progress.
+   * a line graph that shows my weight over the past 7, 30, 90 days so I have a visual representation of my weight change.
+   * to be able to set a weight goal and have that goal visible on the graph because setting goals is important.
+   * the app to create smaller goals, or milestones, based on the goal I have set so it helps keep me motivated.
+   * the app to keep track and display the amount of weight I have lost/gained in the last 7, 30, and 60 days as well as all time to help visualize my progress.
+* to keep track of my diet.
+   * To record the amount of calories I eat in a day so I don't overeat
+   * to be able to set a calorie limit/goal and have that displayed along with a progress bar to better help visualize how close I am to my limit/goal that day.
+   * to also keep track of other nutrition related data (sugar, carbs, fat, etc.) in a similar way to calories.
+   * To keep track of my daily water intake to make sure I stay hydrated.
+* To keep track of my fitness
+   * The app to track the amount of distance I walk/run because data is beautiful
+   * To set walking/running distance goals to help motivate
+   * To be able to record my workout routine. For example, what exercises I want to do, the amount of sets/reps/weight I want to do for each exercise, be able to adjust these values as I improve.
+   * To look at pre-existing workout routines for users who don’t know/don’t have their own workout routine.
+   * The app to try and give an estimated calories burned based on my workouts
+* The app …
+   * To allow me to customize the main window to display information I think is most important for me so that it’s right there when I open the app.
+   * to have tabs for weight, diet, and fitness to displays more details than in the main window.
+   * to have a user tab so I can see/edit personal info such as age, height, etc…
+   * to display a summary page after each day so I can see data for that day and my progress toward my goals.
+   * To have a dark theme because I don't want to burn my eyes
+   * To be accessible on multiple platforms for my convenience.  
+   * To be able to set personal goals to help motivate.
+   * To generate a printable report to share with doctor/dietician, or to keep personal record.
+   * To allow me to compare/compete with friends I add on the app in order to motivate me.
+   * To have leaderboards for different health aspects so I can compete with my friends. (Choose what data is shared)
