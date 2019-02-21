@@ -1,5 +1,10 @@
 ﻿User Stories
 
+/* Comments based on what Sepideh said that needs to get looked at */
+* - Ideally the stories that have multiple features should be broken into multiple tasks in the sprint backlog
+** - Confused at this statement
+*** - Make sure your user stories are clear enough so you don't have to provide an example. Developers shouldn't need to interpret.
+**** - Also maybe think of privacy stories??
 
 As a user I would like …
 * to keep track of my weight so I can see my weight loss progress.
@@ -9,13 +14,13 @@ As a user I would like …
    * the app to keep track and display the amount of weight I have lost/gained in the last 7, 30, and 60 days as well as all time to help visualize my progress.
 * to keep track of my diet.
    * To record the amount of calories I eat in a day so I don't overeat
-   * to be able to set a calorie limit/goal and have that displayed along with a progress bar to better help visualize how close I am to my limit/goal that day.
+   * to be able to set a calorie limit/goal and have that displayed along with a progress bar to better help visualize how close I am to my limit/goal that day.*
    * to also keep track of other nutrition related data (sugar, carbs, fat, etc.) in a similar way to calories.
    * To keep track of my daily water intake to make sure I stay hydrated.
 * To keep track of my fitness
-   * The app to track the amount of distance I walk/run because data is beautiful
+   * The app to track the amount of distance I walk/run because data is beautiful**
    * To set walking/running distance goals to help motivate
-   * To be able to record my workout routine. For example, what exercises I want to do, the amount of sets/reps/weight I want to do for each exercise, be able to adjust these values as I improve.
+   * To be able to record my workout routine. For example, what exercises I want to do, the amount of sets/reps/weight I want to do for each exercise, be able to adjust these values as I improve.***
    * To look at pre-existing workout routines for users who don’t know/don’t have their own workout routine.
    * The app to try and give an estimated calories burned based on my workouts
 * The app …
@@ -28,4 +33,4 @@ As a user I would like …
    * To be able to set personal goals to help motivate.
    * To generate a printable report to share with doctor/dietician, or to keep personal record.
    * To allow me to compare/compete with friends I add on the app in order to motivate me.
-   * To have leaderboards for different health aspects so I can compete with my friends. (Choose what data is shared)
+   * To have leaderboards for different health aspects so I can compete with my friends. (Choose what data is shared) ****
