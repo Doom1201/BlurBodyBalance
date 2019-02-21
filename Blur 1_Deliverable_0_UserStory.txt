@@ -2,7 +2,6 @@
 
 /* Comments based on what Sepideh said that needs to get looked at */
 * - Ideally the stories that have multiple features should be broken into multiple tasks in the sprint backlog
-** - Confused at this statement
 *** - Make sure your user stories are clear enough so you don't have to provide an example. Developers shouldn't need to interpret.
 **** - Also maybe think of privacy stories??
 
@@ -18,7 +17,7 @@ As a user I would like …
    * to also keep track of other nutrition related data (sugar, carbs, fat, etc.) in a similar way to calories.
    * To keep track of my daily water intake to make sure I stay hydrated.
 * To keep track of my fitness
-   * The app to track the amount of distance I walk/run because data is beautiful**
+   * The app to track the amount of distance I walk/run so I can see if I'm hitting my goals
    * To set walking/running distance goals to help motivate
    * To be able to record my workout routine. For example, what exercises I want to do, the amount of sets/reps/weight I want to do for each exercise, be able to adjust these values as I improve.***
    * To look at pre-existing workout routines for users who don’t know/don’t have their own workout routine.
