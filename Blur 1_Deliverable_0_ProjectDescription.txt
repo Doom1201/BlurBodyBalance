@@ -1,9 +1,15 @@
-﻿Group Name: Blur 1
+/* Comments from Sepideh */
+* - Still very high level. It would be good to elaborate more on the application description
+** - How is your application different from these applications? You needed to a comparison
+What distinctive features do you propose that these apps do not have?
+
+
+Group Name: Blur 1
 Team Members: 
 Anthony Arbour, Adam Smith, Jacob Boudreau, Sam Beaudoin, Kenneth Seneres, 
 Henrikus Freeman
 App Name/Category: Blur Body Balance/Health & Fitness
-Application Description:
+Application Description: *
 Blur Body Balance helps keep track of your weight, diet, and workouts all in one place to motivate you to meet your goals. This project seeks to develop an all in one place to keep track of your health. This app will allow the user create a personalized display that will allow them enter their own data and generate user reports. This app will allow users to set goals and will offer motivational features.
 
 Similar Applications:
