@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "447122961621",
+    "firebase_url": "https://blurbodybalance.firebaseio.com",
+    "project_id": "blurbodybalance",
+    "storage_bucket": "blurbodybalance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447122961621:android:c0aceb4802fd2cb9",
+        "android_client_info": {
+          "package_name": "com.example.blurbodybalance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447122961621-3npib65pcclug3019k908hq0ndkdsotc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKhYirhGzAGuV6QLg_dJCpJvYSG5nYMZA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
