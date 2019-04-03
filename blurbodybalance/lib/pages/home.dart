@@ -1,26 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:blurbodybalance/globals.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key, this.user}) : super(key: key);
   final FirebaseUser user;
   @override
   _HomeState createState() => _HomeState();
-}
-
-bool isDark = true;
-
-// Testing Dark Mode
-class DarkMode {
-  Color curCol;
-  Color dark() {
-    if (!isDark) {
-      curCol = Color.fromRGBO(255, 255, 255, 50);
-    } else {
-      curCol = Color.fromRGBO(29, 29, 29, 90);
-    }
-    return curCol;
-  }
 }
 
 class _HomeState extends State<Home> {
@@ -30,9 +16,9 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: Text('Home'),
           centerTitle: true,
-          backgroundColor: DarkMode().dark(),
+          backgroundColor: dark(),
         ),
-        backgroundColor: DarkMode().dark(),
+        backgroundColor: dark(),
         body: new Center(
             child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
