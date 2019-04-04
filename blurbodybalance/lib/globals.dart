@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-bool isDark;
+bool isDark = true;
 
 // This function controls the dark mode functionality
 Color dark() {
