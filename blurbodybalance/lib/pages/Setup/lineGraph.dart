@@ -1,15 +1,19 @@
 /// Example of a simple line chart.
+/// Still working on making this a generalized graph
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
 class SimpleLineChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
+  final xAxis = [];
+  final yAxis = [];
+
 
   SimpleLineChart(this.seriesList, {this.animate});
 
   /// Creates a [LineChart] with sample data and no transition.
-  factory SimpleLineChart.withSampleData() {
+  factory SimpleLineChart.withInputData() {
     return new SimpleLineChart(
       _createSampleData(),
       // Disable animations for image tests.
@@ -24,20 +28,20 @@ class SimpleLineChart extends StatelessWidget {
   }
 
   /// Create one series with sample hard coded data.
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
+  static List<charts.Series<LinearData, int>> _createSampleData() {
     final data = [
-      new LinearSales(0, 5),
-      new LinearSales(1, 25),
-      new LinearSales(2, 100),
-      new LinearSales(3, 75),
+      new LinearData(0, 5),
+      new LinearData(1, 25),
+      new LinearData(2, 100),
+      new LinearData(3, 75),
     ];
 
     return [
-      new charts.Series<LinearSales, int>(
-        id: 'Sales',
+      new charts.Series<LinearData, int>(
+        id: 'Data',
         colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
+        domainFn: (LinearData sales, _) => sales.xAxis,
+        measureFn: (LinearData sales, _) => sales.yAxis,
         data: data,
       )
     ];
@@ -45,9 +49,9 @@ class SimpleLineChart extends StatelessWidget {
 }
 
 /// Sample linear data type.
-class LinearSales {
-  final int year;
-  final int sales;
+class LinearData {
+  final int xAxis;
+  final int yAxis;
 
-  LinearSales(this.year, this.sales);
+  LinearData(this.xAxis, this.yAxis);
 }
