@@ -1,4 +1,4 @@
-import 'package:blurbodybalance/pages/home.dart';
+import 'package:blurbodybalance/pages/Setup/userInfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -157,7 +157,7 @@ class _SignUpPageState extends State<SignUpPage> {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password);
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Home()));
+            context, MaterialPageRoute(builder: (context) => UserrInfo()));
       } catch (e) {
         print(e.message);
       }

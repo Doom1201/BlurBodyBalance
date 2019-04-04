@@ -1,4 +1,4 @@
-import 'package:blurbodybalance/pages/Setup/welcome.dart';
+import 'package:blurbodybalance/pages/home.dart';
 import 'package:blurbodybalance/pages/Setup/signUp.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/signup': (BuildContext context) => new SignUpPage()
       },
-      home: WelcomePage(),
+      home: Home(),
     );
   }
 }
