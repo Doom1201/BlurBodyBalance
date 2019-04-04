@@ -1,7 +1,6 @@
-import 'package:blurbodybalance/pages/home.dart';
+import 'package:blurbodybalance/pages/Setup/userInfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -12,7 +11,7 @@ class _WelcomePageState extends State<WelcomePage> {
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  FacebookLogin fbLogin = new FacebookLogin();
+  //FacebookLogin fbLogin = new FacebookLogin();
 
   @override
   Widget build(BuildContext context) {
@@ -119,39 +118,6 @@ class _WelcomePageState extends State<WelcomePage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20.0),
-                        Container(
-                          height: 40.0,
-                          color: Colors.transparent,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.black,
-                                    style: BorderStyle.solid,
-                                    width: 1.0),
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(20.0)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Center(
-                                  child: ImageIcon(
-                                      AssetImage('assets/images/facebook.png')),
-                                ),
-                                SizedBox(width: 10.0),
-                                RaisedButton(
-                                  onPressed: () {},
-                                ),
-                                Center(
-                                  child: Text('Log in with facebook',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Montserrat')),
-                                )
-                              ],
-                            ),
-                          ),
-                        )
                       ],
                     )),
                 SizedBox(height: 15.0),
@@ -190,8 +156,8 @@ class _WelcomePageState extends State<WelcomePage> {
         FirebaseUser user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
 
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home(user: user)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => UserrInfo(user: user)));
       } catch (e) {
         print(e.message);
       }
