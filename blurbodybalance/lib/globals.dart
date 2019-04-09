@@ -45,16 +45,7 @@ class ColorHandler {
 }
 
 
-// This function controls the dark mode functionality
-Color dark() {
-  Color curCol;
-  if (!isDark) {
-    curCol = Color.fromRGBO(255, 255, 255, 50);
-  } else {
-    curCol = Color.fromRGBO(29, 29, 29, 90);
-  }
-  return curCol;
-}
+
 
 //Insult bank (REMEMBER, GO FOR FUNNY NOT MEAN, ESPECIALLY FOR WEIGHT) 
 List<String> badGeneric = new List<String>();// List of generic insults for goals not met.
