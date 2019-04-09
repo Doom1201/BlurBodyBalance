@@ -1,5 +1,6 @@
-import 'package:blurbodybalance/pages/home.dart';
+import 'package:blurbodybalance/pages/setup/pagehandler.dart';
 import 'package:blurbodybalance/pages/Setup/signUp.dart';
+import 'package:blurbodybalance/pages/Setup/welcome.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -12,7 +13,10 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/signup': (BuildContext context) => new SignUpPage()
       },
-      home: Home(),
+
+      // Whatever page name you put here will be the default page upon startup
+
+      home: PageHandler(),
     );
   }
 }

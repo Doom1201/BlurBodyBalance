@@ -1,10 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:blurbodybalance/globals.dart';
+import 'package:blurbodybalance/pages/settings.dart';
+import 'package:blurbodybalance/pages/profile.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key key, this.user}) : super(key: key);
-  final FirebaseUser user;
   @override
   _HomeState createState() => _HomeState();
 }
@@ -13,29 +12,33 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Home'),
-          centerTitle: true,
-          backgroundColor: dark(),
-        ),
-        backgroundColor: dark(),
-        body: new Center(
-            child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                new RaisedButton(
-                  padding: const EdgeInsets.all(8.0),
-                  textColor: Colors.white,
-                  color: Color.fromRGBO(29, 29, 29, 1),
-                  onPressed: () => setState(() => isDark = !isDark),
-                  child: new Text("Push Me"),
-                )
-              ],
-            )
-          ],
-        )));
+      backgroundColor: ColorHandler().bgDark(),
+      appBar: AppBar(
+        automaticallyImplyLeading:
+            false, // Removes back button so user can't go directly back to login screen have to signout to get there
+        backgroundColor: ColorHandler().barDark(),
+        actions: <Widget>[
+          // Menu button which brings us to the settings page as of now
+          IconButton(
+              icon: Icon(
+                Icons.face,
+                color: ColorHandler().iconDark(),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Profile()));
+              }),
+          IconButton(
+              icon: Icon(
+                Icons.menu,
+                color: ColorHandler().iconDark(),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Settings()));
+              })
+        ],
+      ),
+    );
   }
 }
