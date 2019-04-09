@@ -26,14 +26,15 @@ class _SettingsState extends State<Settings> {
           children: <Widget>[
             Switch(
               value: val,
-              onChanged: (bool e) => mySwitch(e),
+              onChanged: (bool e) => darkSwitch(e),
               activeColor: ColorHandler().iconDark(),
             )
           ],
         ));
   }
 
-  void mySwitch(bool e) {
+  // This function handles the darkModeSwitch
+  void darkSwitch(bool e) {
     setState(() {
       if (e) {
         isDark = true;
