@@ -22,7 +22,7 @@ class ColorHandler {
   }
 
   // This function handles the dark mode color for
-  // Backgrounds
+  // Appbars and widgets
   Color barDark() {
     Color barCol;
     if (!isDark) {
