@@ -1,3 +1,4 @@
+import 'package:blurbodybalance/pages/Setup/pagehandler.dart';
 import 'package:blurbodybalance/pages/Setup/userInfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -157,7 +158,7 @@ class _WelcomePageState extends State<WelcomePage> {
             .signInWithEmailAndPassword(email: _email, password: _password);
 
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => UserrInfo(user: user)));
+            MaterialPageRoute(builder: (context) => PageHandler(user: user)));
       } catch (e) {
         print(e.message);
       }
