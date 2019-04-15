@@ -4,6 +4,9 @@ import 'dart:math';
 // This boolean determines if we want dark mode on or off at startup
 bool isDark = false;
 
+// Switches
+bool drkSwitch = false;
+
 // This class handles anything involving colors including darkmode
 class ColorHandler {
   // This function handles the dark mode color for

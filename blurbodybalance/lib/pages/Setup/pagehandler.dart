@@ -42,7 +42,7 @@ class _PageHandlerState extends State<PageHandler> {
         backgroundColor: ColorHandler().bgDark(),
         body: curPage,
         // Needed to create a new theme for nav bar since there is no variable to change it's color
-        bottomNavigationBar: new Theme(
+        bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
             canvasColor: ColorHandler().barDark(),
           ),

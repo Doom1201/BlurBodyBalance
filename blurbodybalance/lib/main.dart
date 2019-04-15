@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
       // Whatever page name you put here will be the default page upon startup
 
-      home: LoginPage(),
+      home: PageHandler(),
     );
   }
 }

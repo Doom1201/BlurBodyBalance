@@ -8,20 +8,16 @@ class Settings extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
 }
 
+// MediaQueryData trying to get the length/width correct for
+// Multiple devices still needs more functionality/not working yet
 class _SettingsState extends State<Settings> {
   MediaQueryData qData;
-  bool val = false;
   double blocksize;
   double blocksizeVert;
   @override
   Widget build(BuildContext context) {
-    qData = MediaQuery.of(context);
-    blocksize = qData.size.width / 100;
-    blocksizeVert = qData.size.height / 100;
     return WillPopScope(
-        onWillPop: () {
-          return Future.value(false);
-        },
+        onWillPop: () {},
         child: Scaffold(
             backgroundColor: ColorHandler().bgDark(),
             appBar: AppBar(
@@ -32,32 +28,18 @@ class _SettingsState extends State<Settings> {
               iconTheme: IconThemeData(color: ColorHandler().iconDark()),
               backgroundColor: ColorHandler().barDark(),
             ),
-            body: Stack(
+            body: Column(
               children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    DecoratedBox(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.red),
-                        child:
-                            Container(height: blocksizeVert, width: blocksize)),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Center(
-                      child: ButtonBar(
-                        children: <Widget>[
-                          Switch(
-                            value: val,
-                            onChanged: (bool e) => darkSwitch(e),
-                            activeColor: ColorHandler().iconDark(),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                Center(
+                  child: ButtonBar(
+                    children: <Widget>[
+                      Switch(
+                        value: drkSwitch,
+                        onChanged: (bool e) => darkSwitch(e),
+                        activeColor: ColorHandler().iconDark(),
+                      )
+                    ],
+                  ),
                 )
               ],
             )));
@@ -68,11 +50,11 @@ class _SettingsState extends State<Settings> {
     setState(() {
       if (e) {
         isDark = true;
-        val = true;
+        drkSwitch = true;
         e = true;
       } else {
         isDark = false;
-        val = false;
+        drkSwitch = false;
         e = false;
       }
     });
