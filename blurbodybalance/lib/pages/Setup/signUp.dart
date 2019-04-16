@@ -152,7 +152,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future<void> signUp() async {
     final formState = _formKey.currentState;
-    final userManagement = new UserManagement();
+    final userDataManagement = new UserDataManagement();
     if (formState.validate()) {
       formState.save();
       try {
@@ -160,7 +160,8 @@ class _SignUpPageState extends State<SignUpPage> {
           email: _email, 
           password: _password
           ).then((signedInUser) {
-            userManagement.storeNewUser(signedInUser, context);
+            //set up user document with required fields
+            userDataManagement.storeNewUser(signedInUser);
           });
 
         Navigator.pushReplacement(
