@@ -19,15 +19,14 @@ class UserDataManagement {
       )});
   }
 
-  getData(user) {
-    DocumentSnapshot snapshot;
-    Firestore.instance.collection('users').document(user.email).get().then((doc) {
-      snapshot = doc;
-      print("weightData");
-    }).catchError((e) {
-      print("ERROR");
-      print(e);
-    });
-    print(snapshot['weightData']);
+  getWeightData(user) async {
+    DocumentReference document = Firestore.instance.collection('users').document(user.email);
+    DocumentSnapshot snapshot = await document.get();
+
+    List<double> weightData = new List<double>();
+    snapshot['weightData'].forEach((element) => weightData.add(element['weight'].toDouble()));
+    print("data from getdata");
+    print(weightData);
+    return weightData;
   }
 }
