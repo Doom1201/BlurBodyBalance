@@ -11,7 +11,7 @@ class UserrInfo extends StatefulWidget {
 
 class _UserrInfoState extends State<UserrInfo> {
   //String _weight, _age, _height, _gender;
-  String _selectedAge = null;
+  String _selectedAge;
   CrudMethods crudObj = new CrudMethods();
   @override
   Widget build(BuildContext context) {

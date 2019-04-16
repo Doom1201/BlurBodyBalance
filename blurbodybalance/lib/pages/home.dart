@@ -1,3 +1,6 @@
+import 'package:blurbodybalance/usermanagement.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:blurbodybalance/globals.dart';
 import 'package:blurbodybalance/pages/settings.dart';
@@ -15,6 +18,7 @@ class _HomeState extends State<Home> {
         onWillPop: () async => false,
         child: Scaffold(
           backgroundColor: ColorHandler().bgDark(),
-        ));
+      )
+    );
   }
 }

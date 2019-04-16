@@ -11,22 +11,50 @@ class UserDataManagement {
     });
   }
 
+  getData(user, field) async {
+    try {
+      if(field == 'weightData') {
+        return await getWeightData(user);
+      } else {
+        DocumentReference document = Firestore.instance.collection('users').document(user.email);
+        DocumentSnapshot snapshot = await document.get();
+        return snapshot[field];
+      }
+    } catch(error) {
+      print(error);
+    }
+  }
+
+  updateData(user, field, data) {
+    Firestore.instance.collection('users').document(user.email).updateData({
+      field: data,
+    }).catchError((error) {
+      print(error);
+    });
+  }
+
   addWeightEntry(user, weight) {
     Firestore.instance.collection('users').document(user.email).updateData({'weightData':FieldValue.arrayUnion(
       [{
       'weight': weight,
       'timestamp': Timestamp.now()}]
-      )});
+      )}).catchError((error) {
+        print(error);
+      });
   }
 
   getWeightData(user) async {
-    DocumentReference document = Firestore.instance.collection('users').document(user.email);
-    DocumentSnapshot snapshot = await document.get();
-
-    List<double> weightData = new List<double>();
-    snapshot['weightData'].forEach((element) => weightData.add(element['weight'].toDouble()));
-    print("data from getdata");
-    print(weightData);
-    return weightData;
+    try {
+      DocumentReference document = Firestore.instance.collection('users').document(user.email);
+      DocumentSnapshot snapshot = await document.get();
+      List<double> weightData = new List<double>();
+      snapshot['weightData'].forEach((element) => weightData.add(element['weight'].toDouble()));
+      print("data from getdata");
+      print(weightData);
+      return weightData;
+    } catch (error) {
+      print(error);
+      return new List<double>();
+    }
   }
 }

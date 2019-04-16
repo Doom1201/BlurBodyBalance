@@ -10,21 +10,37 @@ class WeightTracker extends StatefulWidget {
 }
 
 class _WeightTrackerState extends State<WeightTracker> {
-  List<double> _weightData;
+  List<double> _weightData = new List<double>();
+
   @override
   Widget build(BuildContext context) {
+    //collect weight data
     getWeightData();
+
+    final lastWeightEntry = Text("Weight Tracker");
+    
+    //final goalProgress
+    //final weightChart
+
     return Scaffold(
       body: Center(
-        child: Text("Weight Tracker"),
+        child: Column(
+          children: <Widget>[
+            lastWeightEntry,
+            //GoalProgress,
+            //WeightChart,
+          ],
+        )
       ),
     );
   }
 
   getWeightData() async {
     UserDataManagement dataManager = new UserDataManagement();
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    var weightData = await dataManager.getWeightData(user);
-    _weightData = weightData[0];
+    //get current firebase user
+    FirebaseUser user = await FirebaseAuth.instance.currentUser().catchError((error) {
+      print(error);
+    });
+    _weightData = await dataManager.getWeightData(user);
   }
 }
