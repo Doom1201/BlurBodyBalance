@@ -4,6 +4,6 @@ void main() {
   group('BlurBodyBalance', () {
     // First we must define the Finders we can use these
     // to locate Widgets
-    final counterTextFinder = find.byValueKey('counter');
+    //final counterTextFinder = find.byValueKey('counter');
   });
 }
