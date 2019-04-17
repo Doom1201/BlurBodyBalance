@@ -18,7 +18,6 @@ class _HomeState extends State<Home> {
         onWillPop: () async => false,
         child: Scaffold(
           backgroundColor: ColorHandler().bgDark(),
-      )
-    );
+        ));
   }
 }

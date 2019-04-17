@@ -48,11 +48,14 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           //login using email and password
-          FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text)
-          .catchError((e) {
+          FirebaseAuth.instance
+              .signInWithEmailAndPassword(
+                  email: emailController.text,
+                  password: passwordController.text)
+              .catchError((e) {
             print(e);
           });
-          
+
           //open page handler
           Navigator.of(context).pushNamed(PageHandler.tag);
         },

@@ -156,13 +156,12 @@ class _SignUpPageState extends State<SignUpPage> {
     if (formState.validate()) {
       formState.save();
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _email, 
-          password: _password
-          ).then((signedInUser) {
-            //set up user document with required fields
-            userDataManagement.storeNewUser(signedInUser);
-          });
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: _email, password: _password)
+            .then((signedInUser) {
+          //set up user document with required fields
+          userDataManagement.storeNewUser(signedInUser);
+        });
 
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => UserrInfo()));
