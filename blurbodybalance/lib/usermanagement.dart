@@ -13,14 +13,15 @@ class UserDataManagement {
 
   getData(user, field) async {
     try {
-      if(field == 'weightData') {
+      if (field == 'weightData') {
         return await getWeightData(user);
       } else {
-        DocumentReference document = Firestore.instance.collection('users').document(user.email);
+        DocumentReference document =
+            Firestore.instance.collection('users').document(user.email);
         DocumentSnapshot snapshot = await document.get();
         return snapshot[field];
       }
-    } catch(error) {
+    } catch (error) {
       print(error);
     }
   }
@@ -34,21 +35,23 @@ class UserDataManagement {
   }
 
   addWeightEntry(user, weight) {
-    Firestore.instance.collection('users').document(user.email).updateData({'weightData':FieldValue.arrayUnion(
-      [{
-      'weight': weight,
-      'timestamp': Timestamp.now()}]
-      )}).catchError((error) {
-        print(error);
-      });
+    Firestore.instance.collection('users').document(user.email).updateData({
+      'weightData': FieldValue.arrayUnion([
+        {'weight': weight, 'timestamp': Timestamp.now()}
+      ])
+    }).catchError((error) {
+      print(error);
+    });
   }
 
   getWeightData(user) async {
     try {
-      DocumentReference document = Firestore.instance.collection('users').document(user.email);
+      DocumentReference document =
+          Firestore.instance.collection('users').document(user.email);
       DocumentSnapshot snapshot = await document.get();
       List<double> weightData = new List<double>();
-      snapshot['weightData'].forEach((element) => weightData.add(element['weight'].toDouble()));
+      snapshot['weightData']
+          .forEach((element) => weightData.add(element['weight'].toDouble()));
       print("data from getdata");
       print(weightData);
       return weightData;
