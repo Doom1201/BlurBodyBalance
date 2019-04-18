@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:blurbodybalance/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:blurbodybalance/globals.dart';
+import 'package:blurbodybalance/pages/settings.dart';
 
 class PageHandler extends StatefulWidget {
   const PageHandler({Key key, this.user}) : super(key: key);
@@ -17,7 +18,7 @@ class _PageHandlerState extends State<PageHandler> {
   // Instantiate these pages to navigate between pages
   Home home;
   // This is temporary until more pages can be navigated to from the nav bar
-  Home placeholder;
+  Settings placeholder;
   List<Widget> pages;
 
   Widget curPage;
@@ -25,7 +26,7 @@ class _PageHandlerState extends State<PageHandler> {
   @override
   void initState() {
     home = Home();
-    placeholder = Home();
+    placeholder = Settings();
 
     pages = [home, placeholder];
     curPage = home;
@@ -35,35 +36,31 @@ class _PageHandlerState extends State<PageHandler> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorHandler().bgDark(),
-        body: curPage,
-        // Needed to create a new theme for nav bar since there is no variable to change it's color
-        bottomNavigationBar: new Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: ColorHandler().barDark(),
-          ),
-          child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              fixedColor: ColorHandler().iconDark(),
-              currentIndex: currentTab,
-              onTap: (int index) {
-                setState(() {
-                  currentTab = index;
-                  curPage = pages[index];
-                });
-              },
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  title: Text('Home',
-                      style: TextStyle(color: ColorHandler().iconDark())),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.delete),
-                  title: Text('PH',
-                      style: TextStyle(color: ColorHandler().iconDark())),
-                ),
-              ]),
-        ));
+      // backgroundColor: ColorHandler().bgDark(),
+      body: curPage,
+      // Needed to create a new theme for nav bar since there is no variable to change it's color
+      bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            // fixedColor: ColorHandler().iconDark(),
+            currentIndex: currentTab,
+            onTap: (int index) {
+              setState(() {
+                currentTab = index;
+                curPage = pages[index];
+              });
+            },
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text('Home'),
+                    // style: TextStyle(color: ColorHandler().iconDark())),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.delete),
+                title: Text('PH'),
+                    // style: TextStyle(color: ColorHandler().iconDark())),
+              ),
+            ]),
+    );
   }
 }

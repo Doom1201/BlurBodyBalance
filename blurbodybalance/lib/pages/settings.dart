@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:blurbodybalance/globals.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
 // This currently doesn't remember the state when switching between pages
 // Need to fix
@@ -9,25 +10,24 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  bool val = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorHandler().bgDark(),
+        // backgroundColor: ColorHandler().bgDark(),
         appBar: AppBar(
           title: Text('Settings',
               style: TextStyle(
-                  color: ColorHandler().iconDark(),
+                  // color: ColorHandler().iconDark(),
                   fontWeight: FontWeight.bold)),
-          iconTheme: IconThemeData(color: ColorHandler().iconDark()),
-          backgroundColor: ColorHandler().barDark(),
+          // iconTheme: IconThemeData(color: ColorHandler().iconDark()),
+          // backgroundColor: ColorHandler().barDark(),
         ),
         body: ButtonBar(
           children: <Widget>[
             Switch(
               value: val,
               onChanged: (bool e) => darkSwitch(e),
-              activeColor: ColorHandler().iconDark(),
+              // activeColor: ColorHandler().iconDark(),
             )
           ],
         ));
@@ -40,10 +40,12 @@ class _SettingsState extends State<Settings> {
         isDark = true;
         val = true;
         e = true;
+        DynamicTheme.of(context).setBrightness(Brightness.dark);
       } else {
         isDark = false;
         val = false;
         e = false;
+        DynamicTheme.of(context).setBrightness(Brightness.light);
       }
     });
   }

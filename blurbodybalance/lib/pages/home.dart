@@ -12,17 +12,17 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorHandler().bgDark(),
+      // backgroundColor: ColorHandler().bgDark(),
       appBar: AppBar(
         automaticallyImplyLeading:
             false, // Removes back button so user can't go directly back to login screen have to signout to get there
-        backgroundColor: ColorHandler().barDark(),
+        // backgroundColor: ColorHandler().barDark(),
         actions: <Widget>[
           // Menu button which brings us to the settings page as of now
           IconButton(
               icon: Icon(
                 Icons.face,
-                color: ColorHandler().iconDark(),
+                // color: ColorHandler().iconDark(),
               ),
               onPressed: () {
                 Navigator.push(context,
@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
           IconButton(
               icon: Icon(
                 Icons.menu,
-                color: ColorHandler().iconDark(),
+                // color: ColorHandler().iconDark(),
               ),
               onPressed: () {
                 Navigator.push(context,
