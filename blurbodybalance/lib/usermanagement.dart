@@ -1,3 +1,4 @@
+import 'package:blurbodybalance/pages/weightTracker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserDataManagement {
@@ -37,7 +38,7 @@ class UserDataManagement {
   addWeightEntry(user, weight) {
     Firestore.instance.collection('users').document(user.email).updateData({
       'weightData': FieldValue.arrayUnion([
-        {'weight': weight, 'timestamp': Timestamp.now()}
+        {'weight': weight, 'timestamp': DateTime.now().toString()}
       ])
     }).catchError((error) {
       print(error);
@@ -49,15 +50,14 @@ class UserDataManagement {
       DocumentReference document =
           Firestore.instance.collection('users').document(user.email);
       DocumentSnapshot snapshot = await document.get();
-      List<double> weightData = new List<double>();
-      snapshot['weightData']
-          .forEach((element) => weightData.add(element['weight'].toDouble()));
-      print("data from getdata");
-      print(weightData);
+      List<weightDataObject> weightData = new List<weightDataObject>();
+      snapshot['weightData'].forEach((element) => weightData.add(
+          new weightDataObject(element['weight'].toDouble(),
+              DateTime.parse(element['timestamp'].toString()))));
       return weightData;
     } catch (error) {
       print(error);
-      return new List<double>();
+      return new List<weightDataObject>();
     }
   }
 }
