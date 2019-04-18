@@ -50,14 +50,14 @@ class UserDataManagement {
       DocumentReference document =
           Firestore.instance.collection('users').document(user.email);
       DocumentSnapshot snapshot = await document.get();
-      List<weightDataObject> weightData = new List<weightDataObject>();
+      List<WeightDataObject> weightData = new List<WeightDataObject>();
       snapshot['weightData'].forEach((element) => weightData.add(
-          new weightDataObject(element['weight'].toDouble(),
+          new WeightDataObject(element['weight'].toDouble(),
               DateTime.parse(element['timestamp'].toString()))));
       return weightData;
     } catch (error) {
       print(error);
-      return new List<weightDataObject>();
+      return new List<WeightDataObject>();
     }
   }
 }

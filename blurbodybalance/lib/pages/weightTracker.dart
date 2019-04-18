@@ -1,10 +1,7 @@
 import 'package:blurbodybalance/usermanagement.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:blurbodybalance/globals.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:flutter/material.dart';
+import 'package:blurbodybalance/lineGraph.dart';
 
 class WeightTracker extends StatefulWidget {
   @override
@@ -12,7 +9,7 @@ class WeightTracker extends StatefulWidget {
 }
 
 class _WeightTrackerState extends State<WeightTracker> {
-  List<weightDataObject> _weightData = new List<weightDataObject>();
+  List<WeightDataObject> _weightData = new List<WeightDataObject>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +49,8 @@ class _WeightTrackerState extends State<WeightTracker> {
           children: <Widget>[
             Text("Chart"),
             Expanded(
-              child: charts.TimeSeriesChart(
-                _createSampleData(),
-                animate: true,
-              ),
+              child: LineGraph.getTimeSeriesChart(
+                  _createSampleData(), GraphLineColor.Blue),
             )
           ],
         ),
@@ -66,10 +61,7 @@ class _WeightTrackerState extends State<WeightTracker> {
         backgroundColor: Colors.grey,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            currentWeightContainer,
-            weightChart
-          ],
+          children: <Widget>[currentWeightContainer, weightChart],
         ));
   }
 
@@ -111,26 +103,18 @@ class _WeightTrackerState extends State<WeightTracker> {
   }
 
   /// Create one series with sample hard coded data.
-  List<charts.Series<weightDataObject, DateTime>> _createSampleData() {
-    _weightData = new List<weightDataObject>();
+  List<WeightDataObject> _createSampleData() {
+    _weightData = new List<WeightDataObject>();
     _weightData
-        .add(new weightDataObject(100, new DateTime(2018, DateTime.april, 10)));
+        .add(new WeightDataObject(100, new DateTime(2018, DateTime.april, 10)));
     _weightData
-        .add(new weightDataObject(120, new DateTime(2018, DateTime.april, 11)));
+        .add(new WeightDataObject(120, new DateTime(2018, DateTime.april, 11)));
     _weightData
-        .add(new weightDataObject(90, new DateTime(2018, DateTime.april, 12)));
+        .add(new WeightDataObject(90, new DateTime(2018, DateTime.april, 12)));
     _weightData
-        .add(new weightDataObject(130, new DateTime(2018, DateTime.april, 13)));
+        .add(new WeightDataObject(130, new DateTime(2018, DateTime.april, 13)));
 
-    return [
-      new charts.Series<weightDataObject, DateTime>(
-        id: 'weight',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (weightDataObject weight, _) => weight.timestamp,
-        measureFn: (weightDataObject weight, _) => weight.weight,
-        data: _weightData,
-      )
-    ];
+    return _weightData;
   }
 
   getWeightData() async {
@@ -144,9 +128,9 @@ class _WeightTrackerState extends State<WeightTracker> {
   }
 }
 
-class weightDataObject {
+class WeightDataObject {
   final double weight;
   final DateTime timestamp;
 
-  weightDataObject(this.weight, this.timestamp);
+  WeightDataObject(this.weight, this.timestamp);
 }
