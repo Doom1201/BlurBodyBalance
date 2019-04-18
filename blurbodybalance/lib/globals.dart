@@ -3,6 +3,7 @@ import 'dart:math';
 
 // This boolean determines if we want dark mode on or off at startup
 bool isDark = false;
+bool val = false;
 // This boolean determines if mean messages have been turned on or off
 bool meanMsg; // T = ON, F = OFF
 
