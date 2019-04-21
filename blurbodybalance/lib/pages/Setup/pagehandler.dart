@@ -39,40 +39,38 @@ class _PageHandlerState extends State<PageHandler> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorHandler().bgDark(),
-        body: curPage,
-        // Needed to create a new theme for nav bar since there is no variable to change it's color
-        bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: ColorHandler().barDark(),
-          ),
-          child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              fixedColor: ColorHandler().iconDark(),
-              currentIndex: currentTab,
-              onTap: (int index) {
-                setState(() {
-                  currentTab = index;
-                  curPage = pages[index];
-                });
-              },
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  title: Text('Home',
-                      style: TextStyle(color: ColorHandler().iconDark())),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.delete),
-                  title: Text('Profile',
-                      style: TextStyle(color: ColorHandler().iconDark())),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.delete),
-                  title: Text('Settings',
-                      style: TextStyle(color: ColorHandler().iconDark())),
-                )
-              ]),
-        ));
+      body: curPage,
+      // Needed to create a new theme for nav bar since there is no variable to change it's color
+
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentTab,
+          onTap: (int index) {
+            setState(() {
+              currentTab = index;
+              curPage = pages[index];
+            });
+          },
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text(
+                'Home',
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.delete),
+              title: Text(
+                'Profile',
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.delete),
+              title: Text(
+                'Settings',
+              ),
+            )
+          ]),
+    );
   }
 }

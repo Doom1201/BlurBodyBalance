@@ -1,3 +1,4 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:blurbodybalance/globals.dart';
 
@@ -19,14 +20,9 @@ class _SettingsState extends State<Settings> {
     return WillPopScope(
         onWillPop: () {},
         child: Scaffold(
-            backgroundColor: ColorHandler().bgDark(),
             appBar: AppBar(
               title: Text('Settings',
-                  style: TextStyle(
-                      color: ColorHandler().iconDark(),
-                      fontWeight: FontWeight.bold)),
-              iconTheme: IconThemeData(color: ColorHandler().iconDark()),
-              backgroundColor: ColorHandler().barDark(),
+                  style: TextStyle(fontWeight: FontWeight.bold)),
             ),
             body: Column(
               children: <Widget>[
@@ -36,11 +32,21 @@ class _SettingsState extends State<Settings> {
                       Switch(
                         value: drkSwitch,
                         onChanged: (bool e) => darkSwitch(e),
-                        activeColor: ColorHandler().iconDark(),
-                      )
+                        //activeColor: ColorHandler().iconDark(),
+                      ),
                     ],
                   ),
-                )
+                ),
+                Center(
+                  child: ButtonBar(
+                    children: <Widget>[
+                      Switch(
+                        value: distSwitch,
+                        onChanged: (bool e) => unitSwitch(e),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             )));
   }
@@ -49,11 +55,23 @@ class _SettingsState extends State<Settings> {
   void darkSwitch(bool e) {
     setState(() {
       if (e) {
-        isDark = true;
         drkSwitch = true;
+        DynamicTheme.of(context).setBrightness(Brightness.dark);
         e = true;
       } else {
-        isDark = false;
+        drkSwitch = false;
+        DynamicTheme.of(context).setBrightness(Brightness.light);
+        e = false;
+      }
+    });
+  }
+
+  void unitSwitch(bool e) {
+    setState(() {
+      if (e) {
+        distSwitch = true;
+        e = true;
+      } else {
         drkSwitch = false;
         e = false;
       }
