@@ -62,13 +62,13 @@ class _PageHandlerState extends State<PageHandler> {
               ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.delete),
+              icon: Icon(Icons.accessibility_new),
               title: Text(
                 'Profile',
               ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.delete),
+              icon: Icon(Icons.settings),
               title: Text(
                 'Settings',
               ),
