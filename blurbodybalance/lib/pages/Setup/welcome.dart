@@ -50,9 +50,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       Container(
                         padding: EdgeInsets.fromLTRB(63.0, 115.0, 0.0, 0.0),
                         child: Text('ody',
-                            style: TextStyle(
-                                fontSize: 80.0, fontWeight: FontWeight.bold)),
-                      ),
                       Container(
                         padding: EdgeInsets.fromLTRB(15.0, 180.0, 0.0, 0.0),
                         child: Text('B',

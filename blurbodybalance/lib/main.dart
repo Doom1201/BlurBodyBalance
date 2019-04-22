@@ -4,6 +4,10 @@ import 'package:blurbodybalance/pages/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart'; // https://proandroiddev.com/how-to-dynamically-change-the-theme-in-flutter-698bd022d0f0
+import 'package:blurbodybalance/pages/Setup/welcome.dart';
+import 'package:blurbodybalance/pages/Setup/pagehandler.dart';
+import 'package:flutter/material.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';    // https://proandroiddev.com/how-to-dynamically-change-the-theme-in-flutter-698bd022d0f0
 
 // Currently can't figure out why runApp new MyApp won't accept
 // brightness in order to remember dark state across app restarts

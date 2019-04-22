@@ -1,6 +1,7 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:blurbodybalance/globals.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
 // This currently doesn't remember the state when switching between pages
 // Need to fix
@@ -56,6 +57,7 @@ class _SettingsState extends State<Settings> {
         drkSwitch = true;
         DynamicTheme.of(context).setBrightness(Brightness.dark);
         e = true;
+        DynamicTheme.of(context).setBrightness(Brightness.dark);
       } else {
         drkSwitch = false;
         DynamicTheme.of(context).setBrightness(Brightness.light);
@@ -72,6 +74,7 @@ class _SettingsState extends State<Settings> {
       } else {
         drkSwitch = false;
         e = false;
+        DynamicTheme.of(context).setBrightness(Brightness.light);
       }
     });
   }
