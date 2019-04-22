@@ -7,7 +7,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  String _email, _password;
+  String _email, _password, _rePassword, _username;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -61,13 +61,47 @@ class _SignUpPageState extends State<SignUpPage> {
                             focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.green))),
                       ),
+                      TextField(
+                        onChanged: (value) {
+                          this._username = value;
+                        },
+                        decoration: InputDecoration(
+                            labelText: 'USERNAME',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.green))),
+                      ),
                       SizedBox(height: 10.0),
                       TextField(
                         onChanged: (value) {
                           this._password = value;
                         },
                         decoration: InputDecoration(
-                            labelText: 'PASSWORD ',
+                            labelText: 'ENTER PASSWORD ',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.green))),
+                        obscureText: true,
+                      ),
+                      SizedBox(height: 10.0),
+                      TextField(
+                        onChanged: (value) {
+                          if (value != this._password) {
+                            new Text('Wrong Password!',
+                                style: TextStyle(color: Colors.red));
+                          } else {
+                            this._rePassword = value;
+                            this._password = this._rePassword;
+                          }
+                        },
+                        decoration: InputDecoration(
+                            labelText: 'RE-ENTER PASSWORD ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -156,6 +190,7 @@ class _SignUpPageState extends State<SignUpPage> {
       try {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password);
+
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => UserrInfo()));
       } catch (e) {
