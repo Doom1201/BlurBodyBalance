@@ -40,10 +40,10 @@ class _HomeState extends State<Home> {
               center: new Icon(
                 Icons.directions_walk,
                 size: 100.0,
-                color: Colors.blue,           // replace with theme
+                color: Colors.green[300],           // replace with theme
               ),
               backgroundColor: Colors.grey,   // replace with theme
-              progressColor: Colors.blue,     // replace with theme
+              progressColor: Colors.green[300],     // replace with theme
               animation: true,
               animationDuration: 1000,     // replace with variable based on percent
             ),
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
                   ),
                   linearStrokeCap: LinearStrokeCap.roundAll,
                   backgroundColor: Colors.grey,   // replace with theme
-                  progressColor: Colors.blue,     // replace with theme
+                  progressColor: Colors.green[300],     // replace with theme
                   animation: true,
                   animationDuration: 500,   // replace with variable based on percent
                 ),
