@@ -1,7 +1,7 @@
 import 'package:blurbodybalance/pages/Setup/pagehandler.dart';
-import 'package:blurbodybalance/pages/Setup/userInfo.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:blurbodybalance/pages/Setup/signUp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -11,9 +11,6 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  //FacebookLogin fbLogin = new FacebookLogin();
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -28,18 +25,47 @@ class _WelcomePageState extends State<WelcomePage> {
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.fromLTRB(15.0, 50.0, 0.0, 0.0),
-                        child: Text('Hello',
+                        child: Text('B',
+                            style: TextStyle(
+                                fontSize: 80.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green)),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(63.0, 50.0, 0.0, 0.0),
+                        child: Text('lur',
+                            style: TextStyle(
+                              fontSize: 80.0,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15.0, 115.0, 0.0, 0.0),
+                        child: Text('B',
+                            style: TextStyle(
+                                fontSize: 80.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green)),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(63.0, 115.0, 0.0, 0.0),
+                        child: Text('ody',
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15.0, 180.0, 0.0, 0.0),
+                        child: Text('B',
+                            style: TextStyle(
+                                fontSize: 80.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green)),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(63.0, 180.0, 0.0, 0.0),
+                        child: Text('alance',
                             style: TextStyle(
                                 fontSize: 80.0, fontWeight: FontWeight.bold)),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(16.0, 115.0, 0.0, 0.0),
-                        child: Text('There',
-                            style: TextStyle(
-                                fontSize: 80.0, fontWeight: FontWeight.bold)),
-                      ),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(220.0, 115.0, 0.0, 0.0),
+                        padding: EdgeInsets.fromLTRB(300.0, 180.0, 0.0, 0.0),
                         child: Text('.',
                             style: TextStyle(
                                 fontSize: 80.0,

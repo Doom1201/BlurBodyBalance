@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+
+Brightness brightness;
 
 // This boolean determines if we want dark mode on or off at startup
 bool isDark = false;
@@ -8,44 +9,30 @@ bool val = false;
 bool meanMsg; // T = ON, F = OFF
 
 
-// This class handles anything involving colors including darkmode
-class ColorHandler {
-  // This function handles the dark mode color for
-  // Backgrounds
-  Color bgDark() {
-    Color bgCol;
-    if (!isDark) {
-      bgCol = Colors.white;
-    } else {
-      bgCol = Colors.black;
-    }
-    return bgCol;
-  }
+// Switches
+bool drkSwitch = false;
+bool distSwitch = false;
 
-  // This function handles the dark mode color for
-  // Appbars and widgets
-  Color barDark() {
-    Color barCol;
-    if (!isDark) {
-      barCol = Colors.white;
-    } else {
-      barCol = Color.fromRGBO(29, 29, 29, 90);
-    }
-    return barCol;
-  }
-  
-  // This function handles the dark mode color for
-  // Icons and Text
-  Color iconDark() {
-    Color iconCol;
-    if (isDark) {
-      iconCol = Colors.white;
-    } else {
-      iconCol = Colors.black;
-    }
 
-    return iconCol;
+// User Info
+String age;
+String weight;
+String height;
+String gender;
+
+// Other
+double globStep;
+
+// Units
+double distUnit;
+
+double calcdistUnit() {
+  if (distSwitch) {
+    distUnit = 1;
+  } else {
+    distUnit = 1.609;
   }
+  return distUnit;
 }
 
 //This function returns a random comment of the specified category
