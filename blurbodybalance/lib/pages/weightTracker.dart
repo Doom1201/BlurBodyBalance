@@ -10,6 +10,7 @@ class WeightTracker extends StatefulWidget {
 
 class _WeightTrackerState extends State<WeightTracker> {
   List<WeightDataObject> _weightData = new List<WeightDataObject>();
+  double _currentWeight = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +26,16 @@ class _WeightTrackerState extends State<WeightTracker> {
                 child: Column(
               children: <Widget>[
                 Text("Current Weight"),
-                Text("###.#"),
+                Text(_currentWeight.toString()),
                 RaisedButton(
                   child: Text("Enter Weight"),
                   elevation: 4.0,
                   color: Colors.blue,
                   textColor: Colors.white,
                   onPressed: () {
-                    inputDialog(context);
+                    inputDialog(context).then((value) {
+                      _currentWeight = value;
+                    });
                   },
                 ),
               ],
@@ -65,12 +68,14 @@ class _WeightTrackerState extends State<WeightTracker> {
         ));
   }
 
-  Future<bool> inputDialog(BuildContext context) {
+  Future<double> inputDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return new SimpleDialog(
-            title: new Text("Enter Weight"),
+            title: new Center(
+              child: new Text("Enter Weight"),
+            ),
             children: <Widget>[
               Center(
                 child: new TextField(
@@ -78,11 +83,7 @@ class _WeightTrackerState extends State<WeightTracker> {
                   keyboardType: TextInputType.numberWithOptions(
                       signed: false, decimal: true),
                   onChanged: (string) {
-                    if (string.contains(' ') ||
-                        string.contains(',') ||
-                        string.contains('-')) {
-                      string = string.substring(0, string.length - 1);
-                    }
+                    //check for illegal characters
                   },
                   onSubmitted: (string) async {
                     //get user
@@ -93,7 +94,7 @@ class _WeightTrackerState extends State<WeightTracker> {
                     //store weight in database
                     UserDataManagement().addWeightEntry(user, weight);
                     //close dialog
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pop(weight);
                   },
                 ),
               )
