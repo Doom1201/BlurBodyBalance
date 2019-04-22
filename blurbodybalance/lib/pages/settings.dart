@@ -17,38 +17,36 @@ class _SettingsState extends State<Settings> {
   double blocksizeVert;
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () {},
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text('Settings',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+    return Scaffold(
+        appBar: AppBar(
+          title:
+              Text('Settings', style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+        body: Column(
+          children: <Widget>[
+            Center(
+              child: ButtonBar(
+                children: <Widget>[
+                  Switch(
+                    value: drkSwitch,
+                    onChanged: (bool e) => darkSwitch(e),
+                    //activeColor: ColorHandler().iconDark(),
+                  ),
+                ],
+              ),
             ),
-            body: Column(
-              children: <Widget>[
-                Center(
-                  child: ButtonBar(
-                    children: <Widget>[
-                      Switch(
-                        value: drkSwitch,
-                        onChanged: (bool e) => darkSwitch(e),
-                        //activeColor: ColorHandler().iconDark(),
-                      ),
-                    ],
+            Center(
+              child: ButtonBar(
+                children: <Widget>[
+                  Switch(
+                    value: distSwitch,
+                    onChanged: (bool e) => unitSwitch(e),
                   ),
-                ),
-                Center(
-                  child: ButtonBar(
-                    children: <Widget>[
-                      Switch(
-                        value: distSwitch,
-                        onChanged: (bool e) => unitSwitch(e),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            )));
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 
   // This function handles the darkModeSwitch

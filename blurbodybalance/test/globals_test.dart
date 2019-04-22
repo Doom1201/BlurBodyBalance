@@ -9,11 +9,5 @@ void main() {
 
       expect(dark, false);
     });
-
-    test('Color should be white at start', () {
-      final clrWhite = ColorHandler();
-
-      expect(clrWhite.bgDark(), Colors.white);
-    });
   });
 }

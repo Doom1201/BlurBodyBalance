@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:blurbodybalance/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:blurbodybalance/globals.dart';
+import 'package:blurbodybalance/pages/social.dart';
 
 class PageHandler extends StatefulWidget {
   const PageHandler({Key key, this.user}) : super(key: key);
   final FirebaseUser user;
-  static String tag = 'pagehandler';
+  static String tag = 'PageHandler';
   @override
   _PageHandlerState createState() => _PageHandlerState();
 }
@@ -21,6 +22,7 @@ class _PageHandlerState extends State<PageHandler> {
   Home home;
   Profile profile;
   Settings settings;
+  Social social;
   List<Widget> pages;
 
   Widget curPage;
@@ -30,8 +32,9 @@ class _PageHandlerState extends State<PageHandler> {
     home = Home();
     profile = Profile();
     settings = Settings();
+    social = Social();
 
-    pages = [home, profile, settings];
+    pages = [home, profile, social, settings];
     curPage = home;
     super.initState();
   }
@@ -65,11 +68,17 @@ class _PageHandlerState extends State<PageHandler> {
               ),
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.group),
+              title: Text(
+                'Friends',
+              ),
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.delete),
               title: Text(
                 'Settings',
               ),
-            )
+            ),
           ]),
     );
   }
