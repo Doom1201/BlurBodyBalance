@@ -12,10 +12,34 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'My Profile',
-        ),
+        title: Text('My Profile')
       ),
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    return Column(
+      children: <Widget>[
+        Center(
+          child: new Icon(
+            Icons.account_circle,
+            size: 200.0,
+            color: Colors.green[300],
+          ),
+        ),
+        Text("name:", textAlign: TextAlign.center),
+        Text("email:", textAlign: TextAlign.center),
+        // Text("password:", textAlign: TextAlign.center),
+        Text("height:", textAlign: TextAlign.center),
+        Text("weight:", textAlign: TextAlign.center),
+        // Row(
+        //   children: <Widget>[
+        //     Expanded(child: Text("asdf", textAlign: TextAlign.left,)),
+        //     Expanded(child: Text("asdf", textAlign: TextAlign.right,)),
+        //   ],
+        // )
+      ],
     );
   }
 }
