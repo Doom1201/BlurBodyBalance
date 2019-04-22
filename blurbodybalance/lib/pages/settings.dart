@@ -1,3 +1,4 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:blurbodybalance/globals.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -9,43 +10,88 @@ class Settings extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
 }
 
+// MediaQueryData trying to get the length/width correct for
+// Multiple devices still needs more functionality/not working yet
 class _SettingsState extends State<Settings> {
+  MediaQueryData qData;
+  double blocksize;
+  double blocksizeVert;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        // backgroundColor: ColorHandler().bgDark(),
-        appBar: AppBar(
-          title: Text('Settings',
-              style: TextStyle(
-                  // color: ColorHandler().iconDark(),
-                  fontWeight: FontWeight.bold)),
-          // iconTheme: IconThemeData(color: ColorHandler().iconDark()),
-          // backgroundColor: ColorHandler().barDark(),
-        ),
-        body: ButtonBar(
-          children: <Widget>[
-            Switch(
-              value: val,
-              onChanged: (bool e) => darkSwitch(e),
-              // activeColor: ColorHandler().iconDark(),
-            )
-          ],
-        ));
+    return WillPopScope(
+        onWillPop: () {},
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text('Settings',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+            body: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        "dark mode",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    ButtonBar(
+                      children: <Widget>[
+                        Switch(
+                          value: drkSwitch,
+                          onChanged: (bool e) => darkSwitch(e),
+                          //activeColor: ColorHandler().iconDark(),
+                        ),
+                      ],
+                    ),
+                  ]
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        "units",
+                        textAlign: TextAlign.center,
+                      )
+                    ),
+                    ButtonBar(
+                      children: <Widget>[
+                        Switch(
+                          value: distSwitch,
+                          onChanged: (bool e) => unitSwitch(e),
+                        ),
+                      ],
+                    ),
+                  ]
+                ),
+              ],
+            )));
   }
 
   // This function handles the darkModeSwitch
   void darkSwitch(bool e) {
     setState(() {
       if (e) {
-        isDark = true;
-        val = true;
-        e = true;
+        drkSwitch = true;
         DynamicTheme.of(context).setBrightness(Brightness.dark);
+        e = true;
       } else {
-        isDark = false;
-        val = false;
-        e = false;
+        drkSwitch = false;
         DynamicTheme.of(context).setBrightness(Brightness.light);
+        e = false;
+      }
+    });
+  }
+
+  void unitSwitch(bool e) {
+    setState(() {
+      if (e) {
+        distSwitch = true;
+        e = true;
+      } else {
+        distSwitch = false;
+        e = false;
+        // DynamicTheme.of(context).setBrightness(Brightness.light);
       }
     });
   }
