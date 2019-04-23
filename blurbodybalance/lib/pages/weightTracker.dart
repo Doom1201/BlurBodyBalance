@@ -10,12 +10,17 @@ class WeightTracker extends StatefulWidget {
 
 class _WeightTrackerState extends State<WeightTracker> {
   List<WeightDataObject> _weightData = new List<WeightDataObject>();
+
   double _currentWeight = 0;
+
+  var _lineGraph;
 
   @override
   Widget build(BuildContext context) {
     //collect weight data
-    //getWeightData();
+    getWeightData();
+
+    _lineGraph = LineGraph.getTimeSeriesChart(_weightData, GraphLineColor.Blue);
 
     final currentWeightContainer = Center(
         child: Container(
@@ -33,17 +38,24 @@ class _WeightTrackerState extends State<WeightTracker> {
                   color: Colors.blue,
                   textColor: Colors.white,
                   onPressed: () {
-                    inputDialog(context).then((value) {
-                      _currentWeight = value;
+                    weightInputDialog(context).then((weight) {
+                      setState(() {
+                        //update current weight
+                        _currentWeight = weight;
+                        //add entered value to _weightData
+                        _weightData.add(new WeightDataObject(weight, new DateTime.now()));
+                        //update line graph
+                        _lineGraph = LineGraph.getTimeSeriesChart(_weightData, GraphLineColor.Blue);
+                        print(_weightData[_weightData.length - 1].weight);
+                      });
                     });
                   },
                 ),
               ],
             ))));
 
-    //final goalProgress
-
-    final weightChart = Center(
+    //graph
+    final weightGraphContainer = Center(
       child: Container(
         constraints: BoxConstraints(maxWidth: 300, maxHeight: 300),
         color: Colors.white,
@@ -52,23 +64,23 @@ class _WeightTrackerState extends State<WeightTracker> {
           children: <Widget>[
             Text("Chart"),
             Expanded(
-              child: LineGraph.getTimeSeriesChart(
-                  _createSampleData(), GraphLineColor.Blue),
+              child: _lineGraph,
             )
           ],
         ),
       ),
     );
 
+    //main page
     return Scaffold(
         backgroundColor: Colors.grey,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[currentWeightContainer, weightChart],
+          children: <Widget>[currentWeightContainer, weightGraphContainer],
         ));
   }
 
-  Future<double> inputDialog(BuildContext context) {
+  Future<double> weightInputDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -89,10 +101,11 @@ class _WeightTrackerState extends State<WeightTracker> {
                     //get user
                     FirebaseUser user =
                         await FirebaseAuth.instance.currentUser();
-                    //get entered weight
+
                     double weight = double.parse(string);
+                   
                     //store weight in database
-                    UserDataManagement().addWeightEntry(user, weight);
+                    UserDataManagement().addWeightEntry(user, double.parse(string));
                     //close dialog
                     Navigator.of(context).pop(weight);
                   },
@@ -103,8 +116,8 @@ class _WeightTrackerState extends State<WeightTracker> {
         });
   }
 
-  /// Create one series with sample hard coded data.
-  List<WeightDataObject> _createSampleData() {
+
+  getWeightData() async {
     _weightData = new List<WeightDataObject>();
     _weightData
         .add(new WeightDataObject(100, new DateTime(2018, DateTime.april, 10)));
@@ -115,19 +128,16 @@ class _WeightTrackerState extends State<WeightTracker> {
     _weightData
         .add(new WeightDataObject(130, new DateTime(2018, DateTime.april, 13)));
 
-    return _weightData;
-  }
-
-  getWeightData() async {
-    UserDataManagement dataManager = new UserDataManagement();
-    //get current firebase user
-    FirebaseUser user =
-        await FirebaseAuth.instance.currentUser().catchError((error) {
-      print(error);
-    });
-    _weightData = await dataManager.getWeightData(user);
+    // UserDataManagement dataManager = new UserDataManagement();
+    // //get current firebase user
+    // FirebaseUser user =
+    //     await FirebaseAuth.instance.currentUser().catchError((error) {
+    //   print(error);
+    // });
+    // _weightData = await dataManager.getWeightData(user);
   }
 }
+
 
 class WeightDataObject {
   final double weight;
