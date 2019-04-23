@@ -3,9 +3,10 @@ import 'package:blurbodybalance/pages/weightTracker.dart';
 
 class LineGraph {
   //this chart uses DateTime for X axis
-  static getTimeSeriesChart(data, GraphLineColor lineColor) {
+  static getTimeSeriesWeightChart(
+      double goal, List<WeightDataObject> data, GraphLineColor lineColor) {
     return charts.TimeSeriesChart(
-      _createDateTimeData(data, lineColor),
+      _createDateTimeWeightData(goal, data, lineColor),
       animate: true,
     );
   }
@@ -19,8 +20,14 @@ class LineGraph {
   // }
 }
 
-List<charts.Series<WeightDataObject, DateTime>> _createDateTimeData(
-    List<WeightDataObject> data, GraphLineColor lineColor) {
+List<charts.Series<WeightDataObject, DateTime>> _createDateTimeWeightData(
+    double goal, List<WeightDataObject> data, GraphLineColor lineColor) {
+      //create data for goal line
+      var goalData = new List<WeightDataObject>();
+      data.forEach((element) {
+        goalData.add(new WeightDataObject(goal, element.timestamp));
+      });
+
   return [
     new charts.Series<WeightDataObject, DateTime>(
       id: 'weight',
@@ -28,6 +35,13 @@ List<charts.Series<WeightDataObject, DateTime>> _createDateTimeData(
       domainFn: (WeightDataObject weight, _) => weight.timestamp,
       measureFn: (WeightDataObject weight, _) => weight.weight,
       data: data,
+    ),
+    new charts.Series<WeightDataObject, DateTime>(
+      id: 'goal',
+      colorFn: (_, __) => charts.MaterialPalette.deepOrange.shadeDefault,
+      domainFn: (WeightDataObject goal, _) => goal.timestamp,
+      measureFn: (WeightDataObject goal, _) => goal.weight,
+      data: goalData,
     )
   ];
 }

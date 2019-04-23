@@ -11,6 +11,7 @@ class WeightTracker extends StatefulWidget {
 class _WeightTrackerState extends State<WeightTracker> {
   List<WeightDataObject> _weightData = new List<WeightDataObject>();
   double _currentWeight;
+  double _weightGoal;
   var _lineGraph;
 
   @override
@@ -19,9 +20,8 @@ class _WeightTrackerState extends State<WeightTracker> {
 
     getWeightData();
     _currentWeight = _weightData[_weightData.length - 1].weight;
-    _lineGraph =
-        LineGraph.getTimeSeriesChart(_weightData, GraphLineColor.LightGreen);
-    print(_currentWeight);
+    _lineGraph = LineGraph.getTimeSeriesWeightChart(
+        _weightGoal, _weightData, GraphLineColor.LightGreen);
   }
 
   @override
@@ -50,8 +50,10 @@ class _WeightTrackerState extends State<WeightTracker> {
                         _weightData.add(
                             new WeightDataObject(weight, new DateTime.now()));
                         //update line graph
-                        _lineGraph = LineGraph.getTimeSeriesChart(
-                            _weightData, GraphLineColor.LightGreen);
+                        _lineGraph = LineGraph.getTimeSeriesWeightChart(
+                            _weightGoal,
+                            _weightData,
+                            GraphLineColor.LightGreen);
                         print(_weightData[_weightData.length - 1].weight);
                       });
                     });
@@ -144,6 +146,8 @@ class _WeightTrackerState extends State<WeightTracker> {
       _weightData.add(new WeightDataObject(
           values[i], new DateTime(2018, DateTime.april, 12 + i)));
     }
+
+    _weightGoal = 180.0;
 
     // UserDataManagement dataManager = new UserDataManagement();
     // //get current firebase user
