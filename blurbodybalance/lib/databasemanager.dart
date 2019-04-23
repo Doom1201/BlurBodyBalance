@@ -1,13 +1,12 @@
 import 'package:blurbodybalance/pages/weightTracker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserDataManagement {
+class DatabaseManager {
   storeNewUser(user) {
-    Firestore.instance.collection('users').document(user.email).setData({
-      'email': user.email,
-      'uid': user.uid,
-      'weightData': []
-    }).catchError((e) {
+    Firestore.instance
+        .collection('users')
+        .document(user.email)
+        .setData({'weightData': []}).catchError((e) {
       print(e);
     });
   }

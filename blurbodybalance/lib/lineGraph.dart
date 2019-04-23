@@ -47,7 +47,7 @@ List<charts.Series<WeightDataObject, DateTime>> _createDateTimeData(
 // }
 
 //enumeration of different colors offered. (more are offered, add one if you like)
-enum GraphLineColor { Blue, Green, Red }
+enum GraphLineColor { Blue, Green, Red, LightGreen }
 
 charts.Color getLineColor(GraphLineColor color) {
   var lineColor;
@@ -70,6 +70,11 @@ charts.Color getLineColor(GraphLineColor color) {
         lineColor = charts.MaterialPalette.red.shadeDefault;
       }
       break;
+
+    case GraphLineColor.LightGreen:
+      {
+        lineColor = charts.MaterialPalette.lime.shadeDefault;
+      }
   }
 
   return lineColor;

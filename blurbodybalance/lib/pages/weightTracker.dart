@@ -1,4 +1,4 @@
-import 'package:blurbodybalance/usermanagement.dart';
+import 'package:blurbodybalance/databasemanager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:blurbodybalance/lineGraph.dart';
@@ -10,22 +10,26 @@ class WeightTracker extends StatefulWidget {
 
 class _WeightTrackerState extends State<WeightTracker> {
   List<WeightDataObject> _weightData = new List<WeightDataObject>();
-
-  double _currentWeight = 0;
-
+  double _currentWeight;
   var _lineGraph;
 
   @override
-  Widget build(BuildContext context) {
-    //collect weight data
+  void initState() {
+    super.initState();
+
     getWeightData();
+    _currentWeight = _weightData[_weightData.length - 1].weight;
+    _lineGraph =
+        LineGraph.getTimeSeriesChart(_weightData, GraphLineColor.LightGreen);
+    print(_currentWeight);
+  }
 
-    _lineGraph = LineGraph.getTimeSeriesChart(_weightData, GraphLineColor.Blue);
-
+  @override
+  Widget build(BuildContext context) {
     final currentWeightContainer = Center(
         child: Container(
             constraints: BoxConstraints(maxHeight: 100, maxWidth: 200),
-            color: Colors.white,
+            color: Colors.black,
             padding: EdgeInsets.all(8.0),
             child: Center(
                 child: Column(
@@ -35,7 +39,7 @@ class _WeightTrackerState extends State<WeightTracker> {
                 RaisedButton(
                   child: Text("Enter Weight"),
                   elevation: 4.0,
-                  color: Colors.blue,
+                  color: Colors.lightGreen,
                   textColor: Colors.white,
                   onPressed: () {
                     weightInputDialog(context).then((weight) {
@@ -43,9 +47,11 @@ class _WeightTrackerState extends State<WeightTracker> {
                         //update current weight
                         _currentWeight = weight;
                         //add entered value to _weightData
-                        _weightData.add(new WeightDataObject(weight, new DateTime.now()));
+                        _weightData.add(
+                            new WeightDataObject(weight, new DateTime.now()));
                         //update line graph
-                        _lineGraph = LineGraph.getTimeSeriesChart(_weightData, GraphLineColor.Blue);
+                        _lineGraph = LineGraph.getTimeSeriesChart(
+                            _weightData, GraphLineColor.LightGreen);
                         print(_weightData[_weightData.length - 1].weight);
                       });
                     });
@@ -58,7 +64,7 @@ class _WeightTrackerState extends State<WeightTracker> {
     final weightGraphContainer = Center(
       child: Container(
         constraints: BoxConstraints(maxWidth: 300, maxHeight: 300),
-        color: Colors.white,
+        color: Colors.black,
         padding: EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
@@ -103,9 +109,10 @@ class _WeightTrackerState extends State<WeightTracker> {
                         await FirebaseAuth.instance.currentUser();
 
                     double weight = double.parse(string);
-                   
+
                     //store weight in database
-                    UserDataManagement().addWeightEntry(user, double.parse(string));
+                    DatabaseManager()
+                        .addWeightEntry(user, double.parse(string));
                     //close dialog
                     Navigator.of(context).pop(weight);
                   },
@@ -116,17 +123,27 @@ class _WeightTrackerState extends State<WeightTracker> {
         });
   }
 
-
   getWeightData() async {
     _weightData = new List<WeightDataObject>();
-    _weightData
-        .add(new WeightDataObject(100, new DateTime(2018, DateTime.april, 10)));
-    _weightData
-        .add(new WeightDataObject(120, new DateTime(2018, DateTime.april, 11)));
-    _weightData
-        .add(new WeightDataObject(90, new DateTime(2018, DateTime.april, 12)));
-    _weightData
-        .add(new WeightDataObject(130, new DateTime(2018, DateTime.april, 13)));
+
+    var values = [
+      180.0,
+      182.0,
+      182.0,
+      183.0,
+      188.0,
+      190.0,
+      187.0,
+      189.0,
+      190.0,
+      195.0,
+      200.0
+    ];
+
+    for (int i = 0; i < values.length; ++i) {
+      _weightData.add(new WeightDataObject(
+          values[i], new DateTime(2018, DateTime.april, 12 + i)));
+    }
 
     // UserDataManagement dataManager = new UserDataManagement();
     // //get current firebase user
@@ -137,7 +154,6 @@ class _WeightTrackerState extends State<WeightTracker> {
     // _weightData = await dataManager.getWeightData(user);
   }
 }
-
 
 class WeightDataObject {
   final double weight;
