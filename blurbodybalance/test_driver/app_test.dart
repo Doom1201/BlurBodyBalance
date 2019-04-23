@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-
+/*
 void main() {
   group('BlurBodyBalance', () {
     // First we must define the Finders we can use these
@@ -7,3 +7,4 @@ void main() {
     //final counterTextFinder = find.byValueKey('counter');
   });
 }
+*/

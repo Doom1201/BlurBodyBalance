@@ -1,5 +1,6 @@
 import 'package:blurbodybalance/pages/Setup/crud.dart';
-import 'package:blurbodybalance/pages/home.dart';
+import 'package:blurbodybalance/pages/Setup/pagehandler.dart';
+import 'package:blurbodybalance/pages/Setup/crud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,101 +12,112 @@ class UserrInfo extends StatefulWidget {
 
 class _UserrInfoState extends State<UserrInfo> {
   //String _weight, _age, _height, _gender;
-  String _selectedAge;
+  String _selectedAge = "July 24, 1980";
+  String _selectedGender = "Male";
+  String _selectedWeight = "160 lb";
+  String _selectedHeight = "6'1\"";
   CrudMethods crudObj = new CrudMethods();
+  Color bordCol = Colors.black;
   @override
   Widget build(BuildContext context) {
-    Widget titleSelection = Container(
-        padding: const EdgeInsets.fromLTRB(120, 150, 0, 0),
-        child: Row(
+    return Scaffold(
+        resizeToAvoidBottomPadding: false,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Container(
+              child: Stack(
                 children: <Widget>[
-                  Text("About you",
-                      style: TextStyle(
-                        fontSize: 26.0,
+                  Container(
+                    padding: EdgeInsets.fromLTRB(110, 150.0, 0.0, 0.0),
+                    child: Text('About You',
+                        style: TextStyle(
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(40, 220.0, 0.0, 0.0),
+                    child: Text("This information lets us estimate calories",
+                        style: TextStyle(
+                          fontSize: 15.0,
+                        )),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(75, 240.0, 0.0, 0.0),
+                    child: Text("and workouts tailored for you",
+                        style: TextStyle(
+                          fontSize: 15.0,
+                        )),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(270, 240.0, 0.0, 0.0),
+                    child: Text(".",
+                        style: TextStyle(fontSize: 15.0, color: Colors.green)),
+                  ),
+                  Container(
+                      padding: EdgeInsets.fromLTRB(60, 280, 0, 0),
+                      child: OutlineButton(
+                        child: new Text(_selectedGender),
+                        onPressed: () {
+                          bordCol = Theme.of(context).accentColor;
+                        },
+                        borderSide: BorderSide(color: bordCol),
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0)),
                       )),
+                  Container(
+                      padding: EdgeInsets.fromLTRB(200, 280, 0, 0),
+                      child: OutlineButton(
+                        child: new Text(_selectedAge),
+                        onPressed: () {
+                          bordCol = Theme.of(context).accentColor;
+                        },
+                        borderSide: BorderSide(color: bordCol),
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0)),
+                      )),
+                  Container(
+                      padding: EdgeInsets.fromLTRB(60, 350, 0, 0),
+                      child: OutlineButton(
+                        child: new Text(_selectedWeight),
+                        onPressed: () {
+                          bordCol = Theme.of(context).accentColor;
+                        },
+                        borderSide: BorderSide(color: bordCol),
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0)),
+                      )),
+                  Container(
+                      padding: EdgeInsets.fromLTRB(200, 350, 0, 0),
+                      child: OutlineButton(
+                          child: new Text(_selectedHeight),
+                          onPressed: () {
+                            bordCol = Theme.of(context).accentColor;
+                          },
+                          borderSide: BorderSide(
+                            color: bordCol,
+                          ),
+                          shape: new StadiumBorder())),
+                  Container(
+                      padding: EdgeInsets.fromLTRB(230, 650, 0, 0),
+                      child: RaisedButton(
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                          "Get Started",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  new PageHandler()));
+                          CrudMethods().addData("userData");
+                        },
+                      ))
                 ],
               ),
-            )
+            ),
           ],
         ));
-
-    Widget titleDescSelection = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Container(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(45, 50, 0, 0),
-                child: Text("This information lets us estimate calories",
-                    style: TextStyle(fontSize: 15.0, color: Colors.grey)),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(18, 75, 0, 0),
-                child: Text(
-                    "and workout routines that are specifically tailored to",
-                    style: TextStyle(fontSize: 14.0, color: Colors.grey)),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(170, 95, 0, 0),
-                child: Text("you.",
-                    style: TextStyle(fontSize: 14.0, color: Colors.grey)),
-              )
-            ],
-          ),
-        )
-      ],
-    );
-
-    return MaterialApp(
-        home: Scaffold(
-      body: ListView(
-        children: <Widget>[
-          titleSelection,
-          titleDescSelection,
-          new Container(
-            padding: EdgeInsets.fromLTRB(50, 250, 0, 0),
-            child: DropdownButton(
-              value: _selectedAge,
-              items: _dropDownItem(),
-              onChanged: (value) {
-                _selectedAge = value;
-                setState(() {});
-              },
-              hint: Text('Select Gender'),
-            ),
-          )
-        ],
-      ),
-    ));
   }
 }
-
-List<DropdownMenuItem<String>> _dropDownItem() {
-  List<String> gender = ["Male", "Female", "Other"];
-  return gender
-      .map((value) => DropdownMenuItem(
-            value: value,
-            child: Text(value),
-          ))
-      .toList();
-}
-
-/*
-   child: Container(
-        padding: EdgeInsets.fromLTRB(50, 250, 0, 0),
-        child: DropdownButton(
-          value: _selectedAge,
-          items: _dropDownItem(),
-          onChanged: (value) {
-            _selectedAge = value;
-            setState(() {});
-          },
-          hint: Text('Select Gender'),
-        ),
-      )
-*/

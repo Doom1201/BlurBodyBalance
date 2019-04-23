@@ -1,5 +1,7 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:blurbodybalance/globals.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
 // This currently doesn't remember the state when switching between pages
 // Need to fix
@@ -16,46 +18,63 @@ class _SettingsState extends State<Settings> {
   double blocksizeVert;
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () {},
-        child: Scaffold(
-            backgroundColor: ColorHandler().bgDark(),
-            appBar: AppBar(
-              title: Text('Settings',
-                  style: TextStyle(
-                      color: ColorHandler().iconDark(),
-                      fontWeight: FontWeight.bold)),
-              iconTheme: IconThemeData(color: ColorHandler().iconDark()),
-              backgroundColor: ColorHandler().barDark(),
-            ),
-            body: Column(
-              children: <Widget>[
-                Center(
-                  child: ButtonBar(
-                    children: <Widget>[
-                      Switch(
-                        value: drkSwitch,
-                        onChanged: (bool e) => darkSwitch(e),
-                        activeColor: ColorHandler().iconDark(),
-                      )
-                    ],
+    return Scaffold(
+        appBar: AppBar(
+          title:
+              Text('Settings', style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+        body: Column(
+          children: <Widget>[
+            Center(
+              child: ButtonBar(
+                children: <Widget>[
+                  Switch(
+                    value: drkSwitch,
+                    onChanged: (bool e) => darkSwitch(e),
+                    //activeColor: ColorHandler().iconDark(),
                   ),
-                )
-              ],
-            )));
+                ],
+              ),
+            ),
+            Center(
+              child: ButtonBar(
+                children: <Widget>[
+                  Switch(
+                    value: distSwitch,
+                    onChanged: (bool e) => unitSwitch(e),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 
   // This function handles the darkModeSwitch
   void darkSwitch(bool e) {
     setState(() {
       if (e) {
-        isDark = true;
         drkSwitch = true;
+        DynamicTheme.of(context).setBrightness(Brightness.dark);
+        e = true;
+        DynamicTheme.of(context).setBrightness(Brightness.dark);
+      } else {
+        drkSwitch = false;
+        DynamicTheme.of(context).setBrightness(Brightness.light);
+        e = false;
+      }
+    });
+  }
+
+  void unitSwitch(bool e) {
+    setState(() {
+      if (e) {
+        distSwitch = true;
         e = true;
       } else {
-        isDark = false;
         drkSwitch = false;
         e = false;
+        DynamicTheme.of(context).setBrightness(Brightness.light);
       }
     });
   }
