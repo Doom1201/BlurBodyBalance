@@ -1,11 +1,14 @@
 import 'package:blurbodybalance/databasemanager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pedometer/pedometer.dart';
 import 'dart:async';
 import 'dart:math';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:blurbodybalance/globals.dart';
 
 class Home extends StatefulWidget {
   static String tag = 'Home';
@@ -14,6 +17,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
   static String muestrePasos = "";
   String _km = "Unknown";
   String _calories = "Unknown";
@@ -32,6 +37,7 @@ class _HomeState extends State<Home> {
     super.initState();
     //initPlatformState();
     setUpPedometer();
+    setUpNotifications();
   }
 
   //inicia codigo pedometer
@@ -39,6 +45,23 @@ class _HomeState extends State<Home> {
     Pedometer pedometer = new Pedometer();
     _subscription = pedometer.stepCountStream.listen(_onData,
         onError: _onError, onDone: _onDone, cancelOnError: true);
+  }
+
+  //Setup for notifications
+  void setUpNotifications() {
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var iOS = new IOSInitializationSettings(onDidReceiveLocalNotification: onDidRecieveLocalNotification);
+    var initSettings = new InitializationSettings(android, iOS);
+    flutterLocalNotificationsPlugin.initialize(initSettings, onSelectNotification: onSelectNotification);
+  }
+
+  Future<void> onSelectNotification(String payload) {
+    debugPrint("payload : $payload");
+    showDialog(context: context, builder: (_)=> new AlertDialog(
+      title: new Text('Blur Body Balance'),
+      content: new Text('$payload')
+    ));
   }
 
   void _onData(int stepCountValue) async {
@@ -138,4 +161,74 @@ class _HomeState extends State<Home> {
         ));
     //return WillPopScope(onWillPop: () async => false, child: Scaffold());
   }
+
+  //chooses and sends a notification (50% generic, 50% key specified)
+  String getNotification() {
+      String trueKey;
+      var rng = new Random();
+      int no1= rng.nextInt(2);
+      if (no1 == 0) {         // if generic chosen
+        if ((skipped3Days || behindRunGoal || missedCalGoal) && meanMsg)   //if behind in any aspect and mean messages turned on
+          trueKey = 'badGen';
+        else
+          trueKey = 'goodGen';
+      }
+      else {                  //if non-generic chosen
+        int no2 = rng.nextInt(2);
+        if (no2 == 0) {       //if run focus chosen
+          if (behindRunGoal && meanMsg) {
+            trueKey = 'badUnderRunG';
+          } else {
+            trueKey = 'goodOverRunG';
+          }
+        } else {              //if calorie focus chosen
+          if (missedCalGoal && meanMsg) {
+            trueKey = 'badOverC';
+          } else trueKey = 'goodUnderC';
+        }
+      }
+      //key is now set.
+      return getMessage(trueKey);
+  }
+
+  Future<void> _showDailyAtTime(String key) async {
+    var time = Time(10, 0, 0);
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'BlurBodyBalance',
+        'Blur Body Balance',
+        key);
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.showDailyAtTime(0,
+        'Blur Body Balance', getNotification(), time, platformChannelSpecifics);
+  }
+
+  Future<void> onDidRecieveLocalNotification(
+      int id, String title, String body, String payload) async {
+    // display a dialog with the notification details, tap ok to go to another page
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: Text(title),
+        content: Text(body),
+        actions: [
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            child: Text('Ok'),
+            onPressed: () async {
+              Navigator.of(context, rootNavigator: true).pop();
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Home(),
+                ),
+              );
+            },
+          )
+        ],
+      ),
+    );
+  }
+}
 }
