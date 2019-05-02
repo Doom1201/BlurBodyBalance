@@ -22,6 +22,8 @@ dependencies:
   cloud_firestore: ^0.9.5+1
   flutter_screenutil: ^0.4.2
   font_awesome_flutter: ^8.4.0
+  flutter_sparkline: ^0.1.0
+
   pedometer: ^0.0.5
   percent_indicator: ^1.0.15
   dynamic_theme: ^1.0.1

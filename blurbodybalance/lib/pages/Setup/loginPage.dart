@@ -48,8 +48,8 @@ class _WelcomePageState extends State<WelcomePage> {
                                 color: Colors.green)),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(63.0, 115.0, 0.0, 0.0),
-                        child: Text('ody',
+                          padding: EdgeInsets.fromLTRB(63.0, 115.0, 0.0, 0.0),
+                          child: Text('ody')),
                       Container(
                         padding: EdgeInsets.fromLTRB(15.0, 180.0, 0.0, 0.0),
                         child: Text('B',

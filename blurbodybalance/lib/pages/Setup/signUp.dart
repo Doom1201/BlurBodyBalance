@@ -1,6 +1,7 @@
 import 'package:blurbodybalance/pages/Setup/userInfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:blurbodybalance/databasemanager.dart';
 
 class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
@@ -185,16 +186,21 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future<void> signUp() async {
     final formState = _formKey.currentState;
+    final userDataManagement = new DatabaseManager();
     if (formState.validate()) {
       formState.save();
       try {
         await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: _email, password: _password);
+            .createUserWithEmailAndPassword(email: _email, password: _password)
+            .then((signedInUser) {
+          //set up user document with required fields
+          userDataManagement.storeNewUser(signedInUser);
+        });
 
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => UserrInfo()));
       } catch (e) {
-        print(e.message);
+        print(e);
       }
     }
   }
