@@ -9,6 +9,11 @@ bool val = false;
 // This boolean determines if mean messages have been turned on or off
 bool meanMsg; // T = ON, F = OFF
 
+// These booleans keep track of whether the user is falling behind
+bool skipped3Days;
+bool behindRunGoal;
+bool missedCalGoal;
+
 // Switches
 bool drkSwitch = false;
 bool distSwitch = false;
@@ -92,7 +97,7 @@ String getMessage(String cat) {
       return msgHelp(goodGeneric);
     case 'goodUnderC':
       return msgHelp(goodUnderCal);
-    case 'goodOverRungG':
+    case 'goodOverRunG':
       return msgHelp(goodOverRunGoal);
     default:
       throw Exception('Improper category given');
