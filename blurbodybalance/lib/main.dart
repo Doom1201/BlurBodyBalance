@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
               '/signup': (BuildContext context) => new SignUpPage()
             },
             theme: theme,
-            home: WeightTracker(),
+            home: Home(),
           );
         });
   }
